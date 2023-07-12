@@ -1,0 +1,13 @@
+image: alpine:latest
+
+stages:
+  - deploy-production
+
+deploy_production:
+  stage: deploy-production
+  environment:
+    name: production
+  script:
+    - wget --tries=1 -q -O - 'https://apps.imscomply.com.au/ims-api/deploy.php?v=9687727f-0ce1-4b72-8648-54b375337453'
+  rules:
+    - if: '$CI_COMMIT_BRANCH == "main"'
